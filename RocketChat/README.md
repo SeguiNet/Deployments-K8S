@@ -14,7 +14,7 @@ El StateFulSet de MondoDB guarda los datos persistentes localmente en el path */
 
 ### 3.- Ejecutar ficheros los yamel en orden
 
-Ejecutaremos los fichero desde el 00-xx al 03-xx, al completarse el deployment podremos acceder a través de la siguiente url:
+Ejecutaremos los todos fichero desde el 00-xx al 03-xx *(kubectl apply -f xxxx)*, al completarse el deployment podremos acceder a través de la siguiente url:
 
 *http://IP_host:30333*
 
