@@ -1,1 +1,1 @@
-# Repositorio de SeguiNet - www.seguinet.es
+# Repositorio de David Seguí - www.seguinet.es
