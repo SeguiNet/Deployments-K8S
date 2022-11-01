@@ -5,6 +5,7 @@
 El StateFulSet de MondoDB guarda los datos persistentes localmente en el path */opt/rocketchat/data* por lo que tendremos que crear primero el directorio en el nodo/host.
 
 `mkdir /opt/rocketchat`
+
 `mkdir /opt/rocketchat/data`
 
 ### 2.- Crear el namespace rocketchat
