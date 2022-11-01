@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: "Service"
+metadata: 
+  name: "svc-rocketchat"
+  namespace: rocketchat
+  labels: 
+    app: rocketchat
+spec: 
+  ports: 
+    - name: "rocketchat"
+      port: 3000
+      nodePort: 30333
+  type: "NodePort"
+  selector: 
+    app: "rocketchat"

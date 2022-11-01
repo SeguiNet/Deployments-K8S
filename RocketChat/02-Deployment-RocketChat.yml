@@ -1,0 +1,44 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata: 
+  name: "rocketchat"
+  namespace: "rocketchat"
+spec: 
+  selector: 
+    matchLabels: 
+      app: "rocketchat"
+  replicas: 1
+  template: 
+    metadata: 
+      labels: 
+         app: "rocketchat"
+    spec: 
+      containers: 
+       - name: "rocketchat"
+         image: "rocket.chat:latest"
+         imagePullPolicy: "Always"
+         env: 
+          - name: "PORT"
+            value: 3000
+          - name: "MONGO_URL"
+            value: "mongodb://svc-mongo-db.rocketchat.svc.cluster.local:27017/rocketchat"
+          - name: "MONGO_OPLOG_URL"
+            value: "mongodb://svc-mongo-db.rocketchat.svc.cluster.local:27017/local"
+#         - name: "ROCKETCHAT_URL="
+#           value: "0.0.0.0:3000"
+          ports: 
+            - containerPort: 3000
+              name: "rocketchat"   
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "1m"
+#             storage: 1G
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+#             storage: 5G             
+
+
+
+

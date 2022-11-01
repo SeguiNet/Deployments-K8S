@@ -1,0 +1,61 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata: 
+  name: "mongo-db"
+  namespace: "rocketchat"
+spec:
+  serviceName: "mongo-db" 
+  replicas: 1
+  selector: 
+    matchLabels: 
+       app: "mongo-db"
+  template: 
+    metadata: 
+      labels: 
+        app: "mongo-db"
+    spec: 
+      containers: 
+        - name: "mongo-db"
+          image: "mongo"
+          imagePullPolicy: "Always"
+          env: 
+#              - name: "MONGO_INITDB_ROOT_USERNAME"
+#                value: "admin"
+#              - name: "MONGO_INITDB_ROOT_PASSWORD"
+#                value: "xxxxxxx"
+#              - name: "MONGODB_REPLICA_SET_MODE"
+#                value: "primary"
+#              - name: "MONGODB_REPLICA_SET_NAME"
+#                value: "rs0"
+#              - name: "MONGODB_PORT_NUMBER"
+#                value: "27017"
+#              - name:  "MONGODB_INITIAL_PRIMARY_HOST"
+#                value: "mongodb"
+#              - name: "MONGODB_INITIAL_PRIMARY_PORT_NUMBER"
+#                value: "7017"
+#              - name: "MONGODB_ADVERTISED_HOSTNAME"
+#                value: "mongodb"
+            - name: "MONGODB_ENABLE_JOURNAL" 
+              value: "true"
+            - name: "ALLOW_EMPTY_PASSWORD"
+              value: "yes"
+          ports: 
+            - containerPort: 27017
+              name: "mongodb"                
+          volumeMounts: 
+            - name: "mongodb-persistent-storage"
+              mountPath: "/data/db"
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "1m"
+#             storage: 5G
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+#             storage: 5G
+      volumes: 
+        - name: "mongodb-persistent-storage"
+          hostPath:
+            path: /opt/rocketchat/data
+            type: DirectoryOrCreate
